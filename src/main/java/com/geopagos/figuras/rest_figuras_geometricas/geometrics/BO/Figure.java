@@ -22,4 +22,12 @@ public interface Figure {
         return null;
     }
 
+    default void setBase(Double base){}
+
+    default void setHeight(Double height){}
+
+    default void setLength(Double length){}
+
+    default void setDiameter(Double diameter){}
+
 }
