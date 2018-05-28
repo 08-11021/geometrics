@@ -1,10 +1,8 @@
 package com.geopagos.figuras.rest_figuras_geometricas;
 
+import com.geopagos.figuras.rest_figuras_geometricas.Factory.DAOFactory;
 import com.geopagos.figuras.rest_figuras_geometricas.Factory.Factory;
-import com.geopagos.figuras.rest_figuras_geometricas.geometrics.DAO.CircleDAO;
 import com.geopagos.figuras.rest_figuras_geometricas.geometrics.DAO.FigureDAO;
-import com.geopagos.figuras.rest_figuras_geometricas.geometrics.DAO.SquareDAO;
-import com.geopagos.figuras.rest_figuras_geometricas.geometrics.DAO.TriangleDAO;
 import com.geopagos.figuras.rest_figuras_geometricas.geometrics.BO.Circle;
 import com.geopagos.figuras.rest_figuras_geometricas.geometrics.BO.Square;
 import com.geopagos.figuras.rest_figuras_geometricas.geometrics.BO.Triangle;
@@ -74,20 +72,16 @@ public class RestFigurasGeometricasApplicationTests {
 
 	@Test
 	public void factoryTest() {
-		Factory factory = new Factory("Circulo");
-		assertEquals(factory.getFigure().getType(), "Circulo");
-
-		factory = new Factory("Triangulo");
-		assertEquals(factory.getFigure().getType(), "Triangulo");
-
-		factory = new Factory("Cuadrado");
-		assertEquals(factory.getFigure().getType(), "Cuadrado");
+		Factory factory = new Factory();
+		assertEquals(factory.getFigure("Circulo").getType(), "Circulo");
+		assertEquals(factory.getFigure("Triangulo").getType(), "Triangulo");
+		assertEquals(factory.getFigure("Cuadrado").getType(), "Cuadrado");
 	}
 
 	@Test
 	public void circleCRUDTest(){
-
-		FigureDAO figureDAO = new CircleDAO(this.sessionFactory);
+		DAOFactory dao = new DAOFactory(sessionFactory);
+		FigureDAO figureDAO = dao.getDAO("Circulo");
 		Figure figure = new Circle(5.5);
 
 		Integer id = figureDAO.saveEntity(figure);
@@ -99,8 +93,8 @@ public class RestFigurasGeometricasApplicationTests {
 
 	@Test
 	public void triangleCRUDTest(){
-
-		FigureDAO figureDAO = new TriangleDAO(this.sessionFactory);
+		DAOFactory dao = new DAOFactory(sessionFactory);
+		FigureDAO figureDAO = dao.getDAO("Triangulo");
 		Figure figure = new Triangle(5.5,5.5);
 
 		Integer id = figureDAO.saveEntity(figure);
@@ -113,8 +107,8 @@ public class RestFigurasGeometricasApplicationTests {
 
 	@Test
 	public void squareCRUDTest(){
-
-		FigureDAO figureDAO = new SquareDAO(this.sessionFactory);
+		DAOFactory dao = new DAOFactory(sessionFactory);
+		FigureDAO figureDAO = dao.getDAO("Cuadrado");
 		Figure figure = new Square(5.5);
 
 		Integer id = figureDAO.saveEntity(figure);
