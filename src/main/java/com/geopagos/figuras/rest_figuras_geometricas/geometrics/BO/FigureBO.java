@@ -1,11 +1,11 @@
-package com.geopagos.figuras.rest_figuras_geometricas.geometrics.DAO;
+package com.geopagos.figuras.rest_figuras_geometricas.geometrics.BO;
 
-import com.geopagos.figuras.rest_figuras_geometricas.geometrics.BO.Figure;
+import com.geopagos.figuras.rest_figuras_geometricas.geometrics.VO.Figure;
 import org.hibernate.SessionFactory;
 
 import java.util.List;
 
-public interface FigureDAO {
+public interface FigureBO {
 
     public void setSessionFactory(SessionFactory sessionFactory);
 

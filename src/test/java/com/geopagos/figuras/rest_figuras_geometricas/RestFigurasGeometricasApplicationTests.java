@@ -1,12 +1,12 @@
 package com.geopagos.figuras.rest_figuras_geometricas;
 
-import com.geopagos.figuras.rest_figuras_geometricas.Factory.DAOFactory;
+import com.geopagos.figuras.rest_figuras_geometricas.Factory.BOFactory;
 import com.geopagos.figuras.rest_figuras_geometricas.Factory.Factory;
-import com.geopagos.figuras.rest_figuras_geometricas.geometrics.DAO.FigureDAO;
-import com.geopagos.figuras.rest_figuras_geometricas.geometrics.BO.Circle;
-import com.geopagos.figuras.rest_figuras_geometricas.geometrics.BO.Square;
-import com.geopagos.figuras.rest_figuras_geometricas.geometrics.BO.Triangle;
-import com.geopagos.figuras.rest_figuras_geometricas.geometrics.BO.Figure;
+import com.geopagos.figuras.rest_figuras_geometricas.geometrics.BO.FigureBO;
+import com.geopagos.figuras.rest_figuras_geometricas.geometrics.VO.Circle;
+import com.geopagos.figuras.rest_figuras_geometricas.geometrics.VO.Square;
+import com.geopagos.figuras.rest_figuras_geometricas.geometrics.VO.Triangle;
+import com.geopagos.figuras.rest_figuras_geometricas.geometrics.VO.Figure;
 import org.hibernate.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -80,43 +80,43 @@ public class RestFigurasGeometricasApplicationTests {
 
 	@Test
 	public void circleCRUDTest(){
-		DAOFactory dao = new DAOFactory(sessionFactory);
-		FigureDAO figureDAO = dao.getDAO("Circulo");
+		BOFactory dao = new BOFactory(sessionFactory);
+		FigureBO figureBO = dao.getDAO("Circulo");
 		Figure figure = new Circle(5.5);
 
-		Integer id = figureDAO.saveEntity(figure);
+		Integer id = figureBO.saveEntity(figure);
 		System.out.print(id);
-		assertNotEquals(figureDAO.getEntityById(id), null);
-		assertEquals(figureDAO.getEntityById(id).getDiameter(),figure.getDiameter(),0);
-		assertNotEquals(figureDAO.getEntities().size(),0);
+		assertNotEquals(figureBO.getEntityById(id), null);
+		assertEquals(figureBO.getEntityById(id).getDiameter(),figure.getDiameter(),0);
+		assertNotEquals(figureBO.getEntities().size(),0);
 	}
 
 	@Test
 	public void triangleCRUDTest(){
-		DAOFactory dao = new DAOFactory(sessionFactory);
-		FigureDAO figureDAO = dao.getDAO("Triangulo");
+		BOFactory dao = new BOFactory(sessionFactory);
+		FigureBO figureBO = dao.getDAO("Triangulo");
 		Figure figure = new Triangle(5.5,5.5);
 
-		Integer id = figureDAO.saveEntity(figure);
+		Integer id = figureBO.saveEntity(figure);
 		System.out.print(id);
-		assertNotEquals(figureDAO.getEntityById(id), null);
-		assertEquals(figureDAO.getEntityById(id).getHeight(),figure.getHeight(),0);
-		assertEquals(figureDAO.getEntityById(id).getBase(),figure.getBase(),0);
-		assertNotEquals(figureDAO.getEntities().size(),0);
+		assertNotEquals(figureBO.getEntityById(id), null);
+		assertEquals(figureBO.getEntityById(id).getHeight(),figure.getHeight(),0);
+		assertEquals(figureBO.getEntityById(id).getBase(),figure.getBase(),0);
+		assertNotEquals(figureBO.getEntities().size(),0);
 	}
 
 	@Test
 	public void squareCRUDTest(){
-		DAOFactory dao = new DAOFactory(sessionFactory);
-		FigureDAO figureDAO = dao.getDAO("Cuadrado");
+		BOFactory dao = new BOFactory(sessionFactory);
+		FigureBO figureBO = dao.getDAO("Cuadrado");
 		Figure figure = new Square(5.5);
 
-		Integer id = figureDAO.saveEntity(figure);
+		Integer id = figureBO.saveEntity(figure);
 		System.out.print(id);
-		assertNotEquals(figureDAO.getEntityById(id), null);
-		assertEquals(figureDAO.getEntityById(id).getHeight(),figure.getHeight(),0);
-		assertEquals(figureDAO.getEntityById(id).getBase(),figure.getBase(),0);
-		assertNotEquals(figureDAO.getEntities().size(),0);
+		assertNotEquals(figureBO.getEntityById(id), null);
+		assertEquals(figureBO.getEntityById(id).getHeight(),figure.getHeight(),0);
+		assertEquals(figureBO.getEntityById(id).getBase(),figure.getBase(),0);
+		assertNotEquals(figureBO.getEntities().size(),0);
 	}
 
 }

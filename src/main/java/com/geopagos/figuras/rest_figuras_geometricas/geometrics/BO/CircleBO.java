@@ -1,7 +1,7 @@
-package com.geopagos.figuras.rest_figuras_geometricas.geometrics.DAO;
+package com.geopagos.figuras.rest_figuras_geometricas.geometrics.BO;
 
-import com.geopagos.figuras.rest_figuras_geometricas.geometrics.BO.Circle;
-import com.geopagos.figuras.rest_figuras_geometricas.geometrics.BO.Figure;
+import com.geopagos.figuras.rest_figuras_geometricas.geometrics.VO.Circle;
+import com.geopagos.figuras.rest_figuras_geometricas.geometrics.VO.Figure;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -11,11 +11,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class CircleDAO implements FigureDAO {
+public class CircleBO implements FigureBO {
     private SessionFactory sessionFactory;
     Session session;
 
-    public CircleDAO(){
+    public CircleBO(){
 
     }
 

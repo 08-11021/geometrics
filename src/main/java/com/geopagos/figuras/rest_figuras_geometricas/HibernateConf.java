@@ -23,7 +23,7 @@ public class HibernateConf {
     @Bean
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
-        String[] packages = {"com.geopagos.figuras.rest_figuras_geometricas.geometrics.BO" };
+        String[] packages = {"com.geopagos.figuras.rest_figuras_geometricas.geometrics.VO" };
         sessionFactory.setDataSource(dataSource());
         sessionFactory.setPackagesToScan(packages);
         sessionFactory.setHibernateProperties(hibernateProperties());

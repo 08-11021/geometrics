@@ -2,19 +2,12 @@ package com.geopagos.figuras.rest_figuras_geometricas.geometrics.REST;
 
 import java.util.List;
 
-import com.geopagos.figuras.rest_figuras_geometricas.Factory.DAOFactory;
+import com.geopagos.figuras.rest_figuras_geometricas.Factory.BOFactory;
 import com.geopagos.figuras.rest_figuras_geometricas.Factory.Factory;
-import com.geopagos.figuras.rest_figuras_geometricas.geometrics.DAO.CircleDAO;
-import com.geopagos.figuras.rest_figuras_geometricas.geometrics.DAO.FigureDAO;
-import com.geopagos.figuras.rest_figuras_geometricas.geometrics.DAO.SquareDAO;
-import com.geopagos.figuras.rest_figuras_geometricas.geometrics.DAO.TriangleDAO;
-import com.geopagos.figuras.rest_figuras_geometricas.geometrics.BO.Circle;
-import com.geopagos.figuras.rest_figuras_geometricas.geometrics.BO.Square;
-import com.geopagos.figuras.rest_figuras_geometricas.geometrics.BO.Triangle;
-import com.geopagos.figuras.rest_figuras_geometricas.geometrics.BO.Figure;
+import com.geopagos.figuras.rest_figuras_geometricas.geometrics.BO.FigureBO;
+import com.geopagos.figuras.rest_figuras_geometricas.geometrics.VO.Figure;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,16 +27,16 @@ public class Figures {
     @RequestParam(name="base",required = false) Double base,@RequestParam(name="height",required = false) Double height,
                              @RequestParam(name="diameter",required = false) Double diameter) {
         try{
-            DAOFactory dao = new DAOFactory(sessionFactory);
+            BOFactory dao = new BOFactory(sessionFactory);
             Factory factory = new Factory();
-            FigureDAO figureDAO = dao.getDAO(figureType);
+            FigureBO figureBO = dao.getDAO(figureType);
             Figure figure = factory.getFigure(figureType);
 
             figure.setDiameter(diameter);
             figure.setBase(base);
             figure.setHeight(height);
             figure.setLength(length);
-            return ResponseEntity.ok(figureDAO.saveEntity(figure));
+            return ResponseEntity.ok(figureBO.saveEntity(figure));
         }catch(Exception e){
             return ResponseEntity.badRequest().body(null);
         }
@@ -52,9 +45,9 @@ public class Figures {
     @RequestMapping(value="/{figure}", method=GET)
     public ResponseEntity<List<Figure>> getFigure(@PathVariable("figure") String figure) {
         try{
-            DAOFactory dao = new DAOFactory(sessionFactory);
-            FigureDAO figureDAO = dao.getDAO("Cuadrado");
-            return ResponseEntity.ok(figureDAO.getEntities());
+            BOFactory dao = new BOFactory(sessionFactory);
+            FigureBO figureBO = dao.getDAO("Cuadrado");
+            return ResponseEntity.ok(figureBO.getEntities());
         }catch(Exception e){
             return ResponseEntity.badRequest().body(null);
         }
@@ -63,9 +56,9 @@ public class Figures {
     @RequestMapping(value="/{figure}/{id}", method=GET)
     public ResponseEntity<Figure> getFigure(@PathVariable("id") Integer id,@PathVariable("figure") String figure) {
         try{
-            DAOFactory dao = new DAOFactory(sessionFactory);
-            FigureDAO figureDAO = dao.getDAO(figure);
-            return ResponseEntity.ok(figureDAO.getEntityById(id));
+            BOFactory dao = new BOFactory(sessionFactory);
+            FigureBO figureBO = dao.getDAO(figure);
+            return ResponseEntity.ok(figureBO.getEntityById(id));
         }catch(Exception e){
             return ResponseEntity.badRequest().body(null);
         }

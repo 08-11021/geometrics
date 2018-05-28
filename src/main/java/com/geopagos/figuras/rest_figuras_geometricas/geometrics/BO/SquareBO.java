@@ -1,7 +1,7 @@
-package com.geopagos.figuras.rest_figuras_geometricas.geometrics.DAO;
+package com.geopagos.figuras.rest_figuras_geometricas.geometrics.BO;
 
-import com.geopagos.figuras.rest_figuras_geometricas.geometrics.BO.Triangle;
-import com.geopagos.figuras.rest_figuras_geometricas.geometrics.BO.Figure;
+import com.geopagos.figuras.rest_figuras_geometricas.geometrics.VO.Square;
+import com.geopagos.figuras.rest_figuras_geometricas.geometrics.VO.Figure;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -11,11 +11,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class TriangleDAO implements FigureDAO{
+public class SquareBO implements FigureBO {
     private SessionFactory sessionFactory;
     Session session;
 
-    public TriangleDAO(){
+    public SquareBO(){
 
     }
 
@@ -28,11 +28,11 @@ public class TriangleDAO implements FigureDAO{
     public Figure getEntityById(Integer id){
         this.session = sessionFactory.openSession();
         Transaction tx = null;
-        Triangle result = null;
+        Square result = null;
         try {
 
             tx = this.session.beginTransaction();
-            result = (Triangle) session.get(Triangle.class, id);
+            result = (Square) session.get(Square.class, id);
             tx.commit();
         } catch (HibernateException e) {
             if (tx!=null) tx.rollback();
@@ -44,22 +44,22 @@ public class TriangleDAO implements FigureDAO{
     }
 
     @Override
-    public Integer saveEntity(Figure triangle){
-        this.session = this.sessionFactory.openSession();
+    public Integer saveEntity(Figure square){
+        this.session = sessionFactory.openSession();
         Transaction tx = null;
-        Integer triangleID = null;
+        Integer squareID = null;
 
         try {
             tx = this.session.beginTransaction();
-            triangleID = (Integer) this.session.save((Triangle) triangle);
+            squareID = (Integer) session.save(square);
             tx.commit();
         } catch (HibernateException e) {
             if (tx!=null) tx.rollback();
             e.printStackTrace();
         } finally {
-            this.session.close();
+            session.close();
         }
-        return triangleID;
+        return squareID;
     }
 
     @Override
@@ -71,9 +71,9 @@ public class TriangleDAO implements FigureDAO{
         try {
 
             tx = session.beginTransaction();
-            List triangles = session.createQuery("FROM Triangle").list();
-            for (Iterator iterator = triangles.iterator(); iterator.hasNext();){
-                result.add((Triangle) iterator.next());
+            List squares = session.createQuery("FROM Square").list();
+            for (Iterator iterator = squares.iterator(); iterator.hasNext();){
+                result.add((Square) iterator.next());
             }
             tx.commit();
         } catch (HibernateException e) {
@@ -86,14 +86,14 @@ public class TriangleDAO implements FigureDAO{
     }
 
     @Override
-    public Boolean deleteEntity(Figure triangle){
+    public Boolean deleteEntity(Figure square){
         this.session = sessionFactory.openSession();
         Boolean result = false;
         Transaction tx = null;
 
         try {
             tx = this.session.beginTransaction();
-            session.delete((Triangle) triangle);
+            session.delete((Square) square);
             tx.commit();
             result = true;
         } catch (HibernateException e) {
@@ -106,4 +106,3 @@ public class TriangleDAO implements FigureDAO{
     }
 
 }
-

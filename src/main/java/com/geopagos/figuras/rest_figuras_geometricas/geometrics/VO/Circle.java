@@ -1,4 +1,4 @@
-package com.geopagos.figuras.rest_figuras_geometricas.geometrics.BO;
+package com.geopagos.figuras.rest_figuras_geometricas.geometrics.VO;
 
 import javax.persistence.*;
 
