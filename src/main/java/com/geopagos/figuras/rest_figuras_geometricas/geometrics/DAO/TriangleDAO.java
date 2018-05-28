@@ -12,10 +12,15 @@ import java.util.Iterator;
 import java.util.List;
 
 public class TriangleDAO implements FigureDAO{
-    SessionFactory sessionFactory;
+    private SessionFactory sessionFactory;
     Session session;
 
-    public TriangleDAO(SessionFactory sessionFactory){
+    public TriangleDAO(){
+
+    }
+
+    @Override
+    public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 

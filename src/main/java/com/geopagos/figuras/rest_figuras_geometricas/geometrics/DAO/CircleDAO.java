@@ -12,10 +12,15 @@ import java.util.Iterator;
 import java.util.List;
 
 public class CircleDAO implements FigureDAO {
-    SessionFactory sessionFactory;
+    private SessionFactory sessionFactory;
     Session session;
 
-    public CircleDAO(SessionFactory sessionFactory){
+    public CircleDAO(){
+
+    }
+
+    @Override
+    public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 

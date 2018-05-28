@@ -12,10 +12,15 @@ import java.util.Iterator;
 import java.util.List;
 
 public class SquareDAO implements FigureDAO{
-    SessionFactory sessionFactory;
+    private SessionFactory sessionFactory;
     Session session;
 
-    public SquareDAO(SessionFactory sessionFactory){
+    public SquareDAO(){
+
+    }
+
+    @Override
+    public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
